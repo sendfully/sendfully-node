@@ -2,7 +2,6 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { Sendfully, SendfullyError } from "../src/index";
 import { buildUserAgent, isBrowser, readEnv } from "../src/internal/runtime";
-import { mockFetch } from "./helpers/mockFetch";
 
 afterEach(() => {
   vi.unstubAllGlobals();
