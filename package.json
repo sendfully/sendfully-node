@@ -1,7 +1,24 @@
 {
   "name": "sendfully",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Sendfully Node.js SDK",
+  "author": "Sendfully",
+  "keywords": [
+    "sendfully",
+    "email",
+    "transactional",
+    "transactional-email",
+    "broadcasts",
+    "broadcast-email",
+    "smtp",
+    "sdk",
+    "api",
+    "email-api"
+  ],
+  "homepage": "https://sendfully.com",
+  "bugs": {
+    "url": "https://github.com/sendfully/sendfully-node/issues"
+  },
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -18,16 +35,25 @@
       }
     }
   },
+  "sideEffects": false,
   "files": [
     "dist"
   ],
   "scripts": {
     "build": "tsdown",
     "clean": "rm -rf dist",
-    "prepublishOnly": "pnpm run build"
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check",
+    "format": "biome format --write",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "openapi": "curl -s http://localhost:3002/v1/openapi.json | python3 -m json.tool > ./openapi.json",
+    "gen:types": "pnpm run openapi && openapi-typescript ./openapi.json --output src/generated/api-types.ts",
+    "check": "pnpm run typecheck && pnpm run lint && pnpm run test",
+    "prepublishOnly": "pnpm run check && pnpm run build"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20.3"
   },
   "license": "MIT",
   "repository": {
@@ -35,7 +61,11 @@
     "url": "git+https://github.com/sendfully/sendfully-node.git"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.4.12",
+    "@types/node": "^25.6.0",
+    "openapi-typescript": "^7.13.0",
     "tsdown": "^0.12.4",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "vitest": "^4.1.4"
   }
 }

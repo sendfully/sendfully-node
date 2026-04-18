@@ -4,12 +4,14 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "strict": true,
+    "noUncheckedIndexedAccess": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "outDir": "dist",
-    "rootDir": "src"
+    "types": ["node"],
+    "verbatimModuleSyntax": true
   },
-  "include": ["src"]
+  "include": ["src", "tests", "vitest.config.ts", "tsdown.config.ts"]
 }
